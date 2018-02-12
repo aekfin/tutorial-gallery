@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.0.0",
+    "firebase": "^4.9.1",
     "jquery": "^3.3.1",
     "popper.js": "^1.12.9",
     "react": "^16.2.0",
@@ -11,7 +12,7 @@
     "react-scripts": "1.1.0"
   },
   "scripts": {
-    "start": "set PORT=10104 && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
