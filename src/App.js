@@ -4,6 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import './main.css'
 import Card from './Card.js'
+import uniqid from 'uniqid'
+
+console.log(uniqid())
 
 var config = {
   apiKey: 'AIzaSyBjpgheUOcUnm3sEnGYdaSnTogYl7_a4h8',
@@ -12,7 +15,14 @@ var config = {
   storageBucket: "bnk48gallery.appspot.com"
 };
 
-firebase.initializeApp(config);
+firebase.initializeApp(config)
+
+// var storage = firebase.storage()
+// var pathReference = storage.ref('images/jdl7bdgn/1.jpg')
+
+// console.log(pathReference.getDownloadURL().then(function (url) {
+//   console.log(url)
+// }))
 
 // firebase.database().ref('albums/').push(album)
 
