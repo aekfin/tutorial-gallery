@@ -4,16 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import './main.css'
 import Card from './Card.js'
-import uniqid from 'uniqid'
-
-console.log(uniqid())
+import AddAlbum from './AddAlbum.js'
 
 var config = {
   apiKey: 'AIzaSyBjpgheUOcUnm3sEnGYdaSnTogYl7_a4h8',
   authDomain: 'bnk48gallery.firebaseapp.com',
-  databaseURL: "https://bnk48gallery.firebaseio.com",
-  storageBucket: "bnk48gallery.appspot.com"
-};
+  databaseURL: 'https://bnk48gallery.firebaseio.com',
+  storageBucket: 'bnk48gallery.appspot.com'
+}
 
 firebase.initializeApp(config)
 
@@ -81,10 +79,10 @@ class App extends Component {
     return (
       <div className="App">
         <nav className="navbar navbar-dark bg-dark justify-content-left">
-          <ul class="nav">
+          <ul className="nav">
             <a className="navbar-brand" href="/">BNK48 Gallery</a>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Add Album</a>
+            <li className="nav-item">
+              <a className="nav-link" href="/" data-toggle="modal" data-target="#AddAlbumModal" >Add Album</a>
             </li>
           </ul>
           <form className="form-inline my-2 my-lg-0 w-25">
@@ -100,6 +98,7 @@ class App extends Component {
             </div>
           </div>
         </div>
+        <AddAlbum firebase={firebase} />
       </div>
     );
   }
