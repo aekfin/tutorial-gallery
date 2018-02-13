@@ -80,8 +80,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <nav className="navbar navbar-dark bg-dark">
-          <a className="navbar-brand" href="/">BNK48 Gallery</a>
+        <nav className="navbar navbar-dark bg-dark justify-content-left">
+          <ul class="nav">
+            <a className="navbar-brand" href="/">BNK48 Gallery</a>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Add Album</a>
+            </li>
+          </ul>
           <form className="form-inline my-2 my-lg-0 w-25">
             <input className="form-control w-100" type="text" placeholder="Search" value={this.state.search} onChange={this.Searching} />
           </form>

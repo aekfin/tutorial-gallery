@@ -7,10 +7,6 @@ body {
   text-align: center;
 }
 
-.navbar-brand {
-  font-size: 24px;
-}
-
 .albums {
   margin-top: 20px;
 }
@@ -111,4 +107,68 @@ body {
   border: 5px solid #343a40;
   margin-top: 50px;
   padding: 50px;
+}
+
+.navbar {
+  padding: 8px 48px;
+}
+
+.navbar-brand {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.nav-link {
+  font-size: 18px;
+  padding: 13px 16px 7px 16px;
+  color: #899097;
+  transition-duration: 0.5s;
+  font-weight: 400;
+}
+
+.nav-link:hover {
+  color: white;
+}
+
+.navbar-toggler {
+  display: none;
+}
+
+.destop {
+  display: block;
+}
+
+.mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .navbar {
+    padding: 8px 32px;
+  }
+  .nav-item {
+    display: block;
+  }
+  .form-inline {
+    width: 100% !important;
+  }
+  .destop {
+    display: none;
+  }
+  .destop {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .navbar {
+    padding: 8px 16px;
+  }
+  .navbar-brand {
+    margin-right: 500px;
+  }
+  .nav-link {
+    padding: 0px;
+    width: 200px;
+  }
 }
