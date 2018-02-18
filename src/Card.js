@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
+var selected = 0
 
 class Card extends Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: {
-        selected: 0
+        selected: selected
       }
     }
     this.state = this.GenerateState(0)
   }
 
-  GenerateState(selected, modalClass) {
+  GenerateState(selected) {
     return {
       card: {
         style: {
@@ -28,19 +29,19 @@ class Card extends Component {
 
   ChangeImage(index) {
     return () => {
-      this.state.modal.selected = index
+      selected = index
       this.setState(this.GenerateState(index))
       var state = this.GenerateState(index)
       state.modal.class = 'img-main fadeIn'
       setTimeout(() => {
         this.setState(state)
-      }, 10);
+      }, 10)
     }
   }
 
   UpdateImageClass() {
     return this.props.albums.photos.map((photo, index) =>
-      <img className={this.state.modal.selected === index ? 'nav-image' : 'nav-image-active'} key={photo} src={photo} onClick={this.ChangeImage(index)} alt="previewImage" />
+      <img className={selected === index ? 'nav-image' : 'nav-image-active'} key={photo} src={photo} onClick={this.ChangeImage(index)} alt="previewImage" />
     )
   }
 
