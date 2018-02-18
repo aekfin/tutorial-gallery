@@ -15,28 +15,25 @@ var config = {
 
 firebase.initializeApp(config)
 
-// var storage = firebase.storage()
-// var pathReference = storage.ref('images/jdl7bdgn/1.jpg')
-
-// console.log(pathReference.getDownloadURL().then(function (url) {
-//   console.log(url)
-// }))
-
-// firebase.database().ref('albums/').push(album)
-
 class App extends Component {
 
   constructor(props) {
     super(props)
     this.isLoading = true
-    this.albums = []
     var self = this
-    firebase.database().ref('albums/').once('value', function(snapshot) {
+    firebase.database().ref('albums/').on('value', function(snapshot) {
+      var albums = []
       snapshot.forEach(function(childSnapshot) {
         var childData = childSnapshot.val()
-        self.albums.push(childData)
+        childData.photos = []
+        firebase.database().ref('albums/' + childSnapshot.key + '/photos/').once('value', function(photos) {
+          photos.forEach(photo => {
+            childData.photos.push(photo.val())
+          })
+          albums.push(childData)
+          self.setState(self.GenerateState(albums, ''))
+        })
       })
-      self.setState(self.GenerateState(self.albums, ''))
       self.isLoading = false
     })
     this.state = this.GenerateState([], '')

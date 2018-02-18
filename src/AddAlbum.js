@@ -2,24 +2,20 @@ import React, { Component } from 'react';
 import uniqid from 'uniqid'
 import $ from 'jquery'
 
-console.log(uniqid())
-
 class AddAlbum extends Component {
   constructor(props) {
     super(props)
-    var firebase = props.firebase 
-    var storage = firebase.storage()
-    var pathReference = storage.ref('images/jdl7bdgn/1.jpg')
+    this.firebase = props.firebase 
+    this.database = this.firebase.database() 
+    this.storage = this.firebase.storage()
 
-    console.log(pathReference.getDownloadURL().then(function (url) {
-      console.log(url)
-    }))
-
-    this.state = {name: '', model: '', desc: '', image: {html: null, selected: -1, images: []}}
+    this.state = {name: '', model: '', link: '', desc: '', image: {html: null, selected: -1, images: []}}
+    this.isUploading = false
     this.HandleChange = this.HandleChange.bind(this)
     this.AddImageList = this.AddImageList.bind(this)
     this.ChangeToCover = this.ChangeToCover.bind(this)
     this.RemoveImage = this.RemoveImage.bind(this)
+    this.UploadData = this.UploadData.bind(this)
   }
 
   readURL(input) {
@@ -75,14 +71,14 @@ class AddAlbum extends Component {
 
   RenderImageList(selected) {
     var html = this.state.image.images.map((image, index) =>
-      <div className="preview-img-list" key={image}>
+      <div className="preview-img-list fadeIn" key={image}>
         <div className="preview-img-list-in" style={{backgroundImage: 'url(' + image + ')'}}>
           <div className="img-action" onClick={this.RemoveImage(index)}><i className="material-icons pa">&#xE872;</i></div>
           <div className="img-action" onClick={this.ChangeToCover(index)}><i className="material-icons pa">&#xE876;</i></div>
         </div>
       </div>
     )
-    
+
     this.setState({
       image: {
         html: html,
@@ -90,6 +86,41 @@ class AddAlbum extends Component {
         images: this.state.image.images
       }
     })
+  }
+
+  UploadData() {
+    this.isUploading = true
+    const dbRef = this.database.ref('albums/')
+    var ref = dbRef.push({
+      cover: this.state.image.selected,
+      desc: this.state.desc,
+      link: this.state.link,
+      model: this.state.model,
+      name: this.state.name,
+      photos: []
+    })
+
+    var image = this.state.image
+    if (image.selected !== 0) {
+      const temp = image.images[0]
+      image.images[0] = image.images[image.selected]
+      image.images[image.selected] = temp
+    }
+    const pathName = uniqid()
+    image.images.forEach((img, index) => {
+      const pathReference = this.storage.ref('images/' + pathName + '/' + (index + 1) + '.jpg')
+      const i = index
+      var self = this
+      pathReference.putString(img, 'data_url').then(function(snapshot) {
+        ref.child('photos').push(snapshot.downloadURL)
+        if (i === image.images.length - 1) {
+          self.isUploading = false
+          $('#AddAlbumModal').modal('toggle')
+          self.setState({name: '', model: '', link: '', desc: '', image: {html: null, selected: -1, images: []}})
+        }
+      })
+    })
+
   }
 
   render() {
@@ -118,6 +149,10 @@ class AddAlbum extends Component {
                         <input type="text" className="form-control" placeholder="Enter name of model" name="model" value={this.state.model} onChange={this.HandleChange} />
                       </div>
                       <div className="form-group">
+                        <label>Link</label>
+                        <input type="text" className="form-control" placeholder="Enter url" name="link" value={this.state.link} onChange={this.HandleChange} />
+                      </div>
+                      <div className="form-group">
                         <label>Description</label>
                         <textarea className="form-control" placeholder="Enter description about this album" name="desc" value={this.state.desc} onChange={this.HandleChange}></textarea>
                         <small className="form-text text-muted">Please write a short description not over 3 lines. (158 character)</small>
@@ -126,7 +161,6 @@ class AddAlbum extends Component {
                     </div>
                     <div className="col-12 col-lg-6">
                       <label className="btn btn-info" id="image-upload">Upload Photos</label>
-                      <label className="btn btn-danger" id="image-clear">Clear</label>
                       <input type="file" id="uploadImage" accept="image/*" />
                       <div className="preview-img text-center">
                         <div 
@@ -141,8 +175,9 @@ class AddAlbum extends Component {
                 </div>
               </div>
               <div className="modal-footer text-center d-block">
-                <button type="button" className="btn btn-secondary w-25" data-dismiss="modal">Close</button>
-                <button type="button" className="btn btn-success w-25">Add</button>
+                {this.isUploading === true && <div class="not-found fadeInQuick" style={{marginTop: '0px'}}><h1><b>Uploading Album...</b></h1></div>}
+                {this.isUploading === false && <button type="button" className="btn btn-secondary w-25" data-dismiss="modal">Close</button>}
+                {this.isUploading === false && <button type="button" className="btn btn-success w-25" onClick={this.UploadData}>Add</button>}
               </div>
             </div>
           </div>

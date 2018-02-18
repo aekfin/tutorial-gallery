@@ -16,7 +16,7 @@ class Card extends Component {
     return {
       card: {
         style: {
-          backgroundImage: 'url(' + this.props.albums.photos[0] + ')'
+          backgroundImage: 'url(' + this.props.albums.photos[this.props.albums.cover] + ')'
         }
       },
       modal: {
