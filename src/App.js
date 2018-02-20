@@ -89,10 +89,10 @@ class App extends Component {
           <ul className="nav">
             <a className="navbar-brand" href="/">BNK48 Gallery</a>
             <li className="nav-item">
-              <a className="nav-link" href="/" data-toggle="modal" data-target="#AddAlbumModal" >Add Album</a>
               <a className="nav-link" href="/" data-toggle="modal" onClick={this.EditAlbum()} >
                 <span className="nav-link-active">{(this.edit) ? 'Admin Mode' : 'Guest Mode'}</span>
               </a>
+              <a className="nav-link" href="/" data-toggle="modal" data-target="#AddAlbumModal" >Add Album</a>
             </li>
           </ul>
           <form className="form-inline my-2 my-lg-0 w-25">
