@@ -91,7 +91,7 @@ class App extends Component {
             <li className="nav-item">
               <a className="nav-link" href="/" data-toggle="modal" data-target="#AddAlbumModal" >Add Album</a>
               <a className="nav-link" href="/" data-toggle="modal" onClick={this.EditAlbum()} >
-                <span className={(this.edit) ? 'nav-link-active' : ''}>Remove Album</span>
+                <span className="nav-link-active">{(this.edit) ? 'Admin Mode' : 'Guest Mode'}</span>
               </a>
             </li>
           </ul>
