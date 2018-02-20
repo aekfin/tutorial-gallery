@@ -9,7 +9,7 @@ class AddAlbum extends Component {
     this.database = this.firebase.database() 
     this.storage = this.firebase.storage()
 
-    this.state = {name: '', model: '', link: '', desc: '', image: {html: null, selected: -1, images: []}}
+    this.state = {name: '', model: '', link: '', desc: '', validation: true, image: {html: null, selected: -1, images: []}}
     this.isUploading = false
     this.HandleChange = this.HandleChange.bind(this)
     this.AddImageList = this.AddImageList.bind(this)
@@ -88,39 +88,48 @@ class AddAlbum extends Component {
     })
   }
 
-  UploadData() {
-    this.isUploading = true
-    const dbRef = this.database.ref('albums/')
-    var ref = dbRef.push({
-      cover: this.state.image.selected,
-      desc: this.state.desc,
-      link: this.state.link,
-      model: this.state.model,
-      name: this.state.name,
-      photos: []
-    })
-
-    var image = this.state.image
-    if (image.selected !== 0) {
-      const temp = image.images[0]
-      image.images[0] = image.images[image.selected]
-      image.images[image.selected] = temp
+  Validation() {
+    if (this.state.name === '' || this.state.model === '' || this.state.link === '' || this.state.desc === '' || this.state.image.selected === -1 || this.state.image.images.length > 0) {
+      return false
+    } else {
+      return true
     }
-    const pathName = uniqid()
-    image.images.forEach((img, index) => {
-      const pathReference = this.storage.ref('images/' + pathName + '/' + (index + 1) + '.jpg')
-      const i = index
-      var self = this
-      pathReference.putString(img, 'data_url').then(function(snapshot) {
-        ref.child('photos').push(snapshot.downloadURL)
-        if (i === image.images.length - 1) {
-          self.isUploading = false
-          $('#AddAlbumModal').modal('toggle')
-          self.setState({name: '', model: '', link: '', desc: '', image: {html: null, selected: -1, images: []}})
-        }
-      })
-    })
+  }
 
+  UploadData() {
+    this.setState({validation: this.Validation()})
+    if (this.Validation()) {
+      this.isUploading = true
+      const dbRef = this.database.ref('albums/')
+      var ref = dbRef.push({
+        cover: this.state.image.selected,
+        desc: this.state.desc,
+        link: this.state.link,
+        model: this.state.model,
+        name: this.state.name,
+        photos: []
+      })
+      var image = this.state.image
+      if (image.selected !== 0) {
+        const temp = image.images[0]
+        image.images[0] = image.images[image.selected]
+        image.images[image.selected] = temp
+      }
+      const pathName = uniqid()
+      image.images.forEach((img, index) => {
+        const pathReference = this.storage.ref('images/' + pathName + '/' + (index + 1) + '.jpg')
+        const i = index
+        var self = this
+        pathReference.putString(img, 'data_url').then(function(snapshot) {
+          ref.child('photos').push(snapshot.downloadURL)
+          if (i === image.images.length - 1) {
+            self.isUploading = false
+            $('#AddAlbumModal').modal('toggle')
+            self.setState({name: '', model: '', link: '', desc: '', validation: true, image: {html: null, selected: -1, images: []}})
+          }
+        })
+      })
+    }
   }
 
   render() {
@@ -173,6 +182,7 @@ class AddAlbum extends Component {
                     </div>
                   </div>
                 </div>
+                {this.state.validation === false && <div className="text-center text-danger"><b>Please fill all of fields.</b></div>}
               </div>
               <div className="modal-footer text-center d-block">
                 {this.isUploading === true && <div class="not-found fadeInQuick" style={{marginTop: '0px'}}><h1><b>Uploading Album...</b></h1></div>}
