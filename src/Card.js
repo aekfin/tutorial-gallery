@@ -8,12 +8,8 @@ class Card extends Component {
     this.database = this.firebase.database() 
     this.storage = this.firebase.storage()
 
-    this.state = {
-      modal: {
-        selected: selected
-      }
-    }
-    this.state = this.GenerateState(0)
+    selected = this.props.album.cover
+    this.state = this.GenerateState(this.props.album.cover)
   }
 
   GenerateState(selected) {
