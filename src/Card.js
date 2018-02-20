@@ -65,9 +65,8 @@ class Card extends Component {
         }
         {(this.props.edit) &&
           <div className="card-img-top" style={this.state.card.style}>
-            <div className="fadeIn">
+            <div className="fadeInQuick">
               <div className="remove-box">
-                <i className="material-icons edit">&#xE3C9;</i>
                 <i className="material-icons remove" data-toggle="modal" data-target={'#remove-' + this.props.album.name}>&#xE5CD;</i>
               </div>
             </div> 
@@ -99,7 +98,7 @@ class Card extends Component {
             <div className="modal-content">
               <div className="modal-body text-center">
                 <h2>Remove this album?</h2>
-                <h4 style={{marginBottom: '50px'}}>"{this.props.album.name}"</h4>
+                <h4 style={{marginBottom: '25px'}}>"{this.props.album.name}"</h4>
                 <button className="btn btn-secondary w-25" data-dismiss="modal" >Cancel</button>
                 <button className="btn btn-danger w-50" data-dismiss="modal" style={{marginLeft: '10px'}} onClick={this.RemoveAlbum()}>Remove</button>
               </div>
