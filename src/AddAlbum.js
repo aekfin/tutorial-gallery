@@ -112,11 +112,6 @@ class AddAlbum extends Component {
         photos: []
       })
       var image = this.state.image
-      if (image.selected !== 0) {
-        const temp = image.images[0]
-        image.images[0] = image.images[image.selected]
-        image.images[image.selected] = temp
-      }
       image.images.forEach((img, index) => {
         const pathReference = this.storage.ref('images/' + pathName + '/' + (index + 1) + '.jpg')
         const i = index
