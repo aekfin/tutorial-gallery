@@ -89,7 +89,7 @@ class AddAlbum extends Component {
   }
 
   Validation() {
-    if (this.state.name === '' || this.state.model === '' || this.state.link === '' || this.state.desc === '' || this.state.image.selected === -1 || this.state.image.images.length > 0) {
+    if (this.state.name === '' || this.state.model === '' || this.state.link === '' || this.state.desc === '' || this.state.image.selected === -1 || this.state.image.images.length === 0) {
       return false
     } else {
       return true
@@ -100,6 +100,7 @@ class AddAlbum extends Component {
     this.setState({validation: this.Validation()})
     if (this.Validation()) {
       this.isUploading = true
+      const pathName = uniqid()
       const dbRef = this.database.ref('albums/')
       var ref = dbRef.push({
         cover: this.state.image.selected,
@@ -107,6 +108,7 @@ class AddAlbum extends Component {
         link: this.state.link,
         model: this.state.model,
         name: this.state.name,
+        photoPath: pathName,
         photos: []
       })
       var image = this.state.image
@@ -115,7 +117,6 @@ class AddAlbum extends Component {
         image.images[0] = image.images[image.selected]
         image.images[image.selected] = temp
       }
-      const pathName = uniqid()
       image.images.forEach((img, index) => {
         const pathReference = this.storage.ref('images/' + pathName + '/' + (index + 1) + '.jpg')
         const i = index
@@ -185,7 +186,7 @@ class AddAlbum extends Component {
                 {this.state.validation === false && <div className="text-center text-danger"><b>Please fill all of fields.</b></div>}
               </div>
               <div className="modal-footer text-center d-block">
-                {this.isUploading === true && <div class="not-found fadeInQuick" style={{marginTop: '0px'}}><h1><b>Uploading Album...</b></h1></div>}
+                {this.isUploading === true && <div className="not-found fadeInQuick" style={{marginTop: '0px'}}><h1><b>Uploading Album...</b></h1></div>}
                 {this.isUploading === false && <button type="button" className="btn btn-secondary w-25" data-dismiss="modal">Close</button>}
                 {this.isUploading === false && <button type="button" className="btn btn-success w-25" onClick={this.UploadData}>Add</button>}
               </div>

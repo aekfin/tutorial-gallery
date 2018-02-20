@@ -72,6 +72,33 @@ body {
   cursor: pointer;
 }
 
+.remove-box {
+  background-color: black;
+  opacity: 0.5;
+  color: white;
+  padding: 5px;
+  border-radius: 2px;
+  height: 40px;
+  text-align: right;
+  transition-duration: 0.5s;
+}
+
+.remove-box > i {
+  font-size: 30px;
+}
+
+.remove-box:hover {
+  opacity: 0.75;
+}
+
+.remove-box > .remove:hover {
+  color: red;
+}
+
+.remove-box > .edit:hover {
+  color: yellowgreen;
+}
+
 .modal-main-image {
   text-align: center;
 }
@@ -124,6 +151,11 @@ body {
   color: #b8bcc0;
   transition-duration: 0.5s;
   font-weight: 400;
+  display: inline-block;
+}
+
+.nav-link-active {
+  color: white;
 }
 
 .nav-link:hover {
@@ -233,10 +265,6 @@ label {
   margin-top: 25px;
   margin-left: 10px;
   font-size: 40px;
-}
-
-.modal-body {
-  min-height: 406px;
 }
 
 @media only screen and (max-width: 768px) {

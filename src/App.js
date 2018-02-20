@@ -20,30 +20,40 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.isLoading = true
+    this.edit = false
     var self = this
     firebase.database().ref('albums/').on('value', function(snapshot) {
-      var albums = []
+      self.albums = []
       snapshot.forEach(function(childSnapshot) {
         var childData = childSnapshot.val()
+        childData.key = childSnapshot.key
         childData.photos = []
         firebase.database().ref('albums/' + childSnapshot.key + '/photos/').once('value', function(photos) {
           photos.forEach(photo => {
             childData.photos.push(photo.val())
           })
-          albums.push(childData)
-          self.setState(self.GenerateState(albums, ''))
+          self.albums.push(childData)
+          self.setState(self.GenerateState(self.albums, '', self.edit))
         })
       })
       self.isLoading = false
     })
     this.state = this.GenerateState([], '')
     this.Searching = this.Searching.bind(this)
+    this.EditAlbum = this.EditAlbum.bind(this)
+  }
+
+  EditAlbum () {
+    return () => {
+      this.edit = !this.edit
+      this.setState(this.GenerateState(this.albums, this.state.search))    
+    }
   }
 
   GenerateState(albums, search) {
     return {
       cards: albums.map(album =>
-        <Card key={album.name} albums={album} />
+        <Card key={album.name} album={album} edit={this.edit} firebase={firebase} />
       ),
       search: search
     }
@@ -80,6 +90,9 @@ class App extends Component {
             <a className="navbar-brand" href="/">BNK48 Gallery</a>
             <li className="nav-item">
               <a className="nav-link" href="/" data-toggle="modal" data-target="#AddAlbumModal" >Add Album</a>
+              <a className="nav-link" href="/" data-toggle="modal" onClick={this.EditAlbum()} >
+                <span className={(this.edit) ? 'nav-link-active' : ''}>Edit Album</span>
+              </a>
             </li>
           </ul>
           <form className="form-inline my-2 my-lg-0 w-25">
