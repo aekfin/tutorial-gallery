@@ -1,0 +1,32 @@
+[debug] [2018-04-16T09:54:44.916Z] ----------------------------------------------------------------------
+[debug] [2018-04-16T09:54:44.918Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Aek_t\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2018-04-16T09:54:44.919Z] CLI Version:   3.18.4
+[debug] [2018-04-16T09:54:44.919Z] Platform:      win32
+[debug] [2018-04-16T09:54:44.919Z] Node Version:  v8.11.1
+[debug] [2018-04-16T09:54:44.919Z] Time:          Mon Apr 16 2018 16:54:44 GMT+0700 (SE Asia Standard Time)
+[debug] [2018-04-16T09:54:44.919Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-04-16T09:54:44.930Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-04-16T09:54:44.930Z] > authorizing via signed-in user
+[debug] [2018-04-16T09:54:44.932Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/bnk48gallery  
+  
+ Mon Apr 16 2018 16:54:44 GMT+0700 (SE Asia Standard Time)
+[debug] [2018-04-16T09:54:46.232Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-16T09:54:46.233Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/bnk48gallery/tokens  
+  
+ Mon Apr 16 2018 16:54:46 GMT+0700 (SE Asia Standard Time)
+[debug] [2018-04-16T09:54:47.057Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-16T09:54:47.058Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/bnk48gallery  
+  
+ Mon Apr 16 2018 16:54:47 GMT+0700 (SE Asia Standard Time)
+[debug] [2018-04-16T09:54:48.292Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\Aek_t\Desktop\React\tutorial-gallery'...
+[info] 
+[debug] [2018-04-16T09:54:48.295Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/1016024538171/clients/_:getWebAppConfig  
+  
+ Mon Apr 16 2018 16:54:48 GMT+0700 (SE Asia Standard Time)
+[debug] [2018-04-16T09:54:49.201Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: build
+[info] +  hosting: Local server: http://localhost:5000
+

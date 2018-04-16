@@ -1,0 +1,48 @@
+[debug] [2018-02-28T04:51:49.177Z] ----------------------------------------------------------------------
+[debug] [2018-02-28T04:51:49.180Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Aek_t\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2018-02-28T04:51:49.180Z] CLI Version:   3.17.4
+[debug] [2018-02-28T04:51:49.180Z] Platform:      win32
+[debug] [2018-02-28T04:51:49.180Z] Node Version:  v8.9.4
+[debug] [2018-02-28T04:51:49.181Z] Time:          Wed Feb 28 2018 11:51:49 GMT+0700 (SE Asia Standard Time)
+[debug] [2018-02-28T04:51:49.181Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-02-28T04:51:49.195Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-02-28T04:51:49.196Z] > authorizing via signed-in user
+[debug] [2018-02-28T04:51:49.198Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-02-28T04:51:49.199Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/_MCZMoA7CZX7USsSO2_aWcGP8ceYpcCpYo_BZdM7U-U',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Wed Feb 28 2018 11:51:49 GMT+0700 (SE Asia Standard Time)
+[debug] [2018-02-28T04:51:49.485Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-28T04:51:49.511Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/bnk48gallery  
+  
+ Wed Feb 28 2018 11:51:49 GMT+0700 (SE Asia Standard Time)
+[debug] [2018-02-28T04:51:50.549Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-28T04:51:50.549Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/bnk48gallery/tokens  
+  
+ Wed Feb 28 2018 11:51:50 GMT+0700 (SE Asia Standard Time)
+[debug] [2018-02-28T04:51:51.361Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\Aek_t\Desktop\React\tutorial-gallery'...
+[info] 
+[debug] [2018-02-28T04:51:51.366Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/bnk48gallery  
+  
+ Wed Feb 28 2018 11:51:51 GMT+0700 (SE Asia Standard Time)
+[debug] [2018-02-28T04:51:52.701Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-28T04:51:52.702Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/1016024538171/clients/_:getWebAppConfig  
+  
+ Wed Feb 28 2018 11:51:52 GMT+0700 (SE Asia Standard Time)
+[debug] [2018-02-28T04:51:53.511Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-28T04:51:53.536Z] TypeError: Cannot read property 'public' of undefined
+    at Server.<anonymous> (C:\Users\Aek_t\AppData\Roaming\npm\node_modules\firebase-tools\lib\serve\hosting.js:34:18)
+    at Object.onceWrapper (events.js:313:30)
+    at emitNone (events.js:106:13)
+    at Server.emit (events.js:208:7)
+    at emitListeningNT (net.js:1378:10)
+    at _combinedTickCallback (internal/process/next_tick.js:135:11)
+    at process._tickDomainCallback (internal/process/next_tick.js:218:9)
+[error] 
+[error] Error: An unexpected error has occurred.
